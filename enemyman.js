@@ -36,7 +36,7 @@ drow(edx)
 {
 	if(!this.alldie())
 	{
-		di="لقد نجحت في اصقاط كل المدنبات ";
+		di="لقد نجحت في اسقاط كل المدنبات ";
 		setTimeout(this.rolead,1000);
 	}
 	for(var i=0;i<this.enimis.length;i++)
