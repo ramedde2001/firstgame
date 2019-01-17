@@ -29,7 +29,7 @@ return isdi;
 }
 rolead()
 {
-	location.reload(true)
+	location.reload(false)
 }
 
 drow(edx)
