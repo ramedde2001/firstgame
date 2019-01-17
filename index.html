@@ -1,0 +1,138 @@
+﻿<canvas id="ctx" width="500" height="500" style="border:1px solid #000000;"></canvas>
+<script src="entyty.js"> </script>
+<script src="enmy.js"> </script>
+<script src="enemyman.js"> </script>
+<script src="bullet.js"> </script>
+<script>
+var background=new Image();
+background.src="image/bg5.jpg"
+var img=new Image();
+this.img.src="image/spaceship.png"
+var enemyImg=new Image();
+enemyImg.src="image/astroid.png"
+var bulletimg=new Image();
+bulletimg.src="image/bullet.png"
+var di="";
+
+
+class player
+{
+constructor()
+{
+this.x=50;
+this.z=100;
+this.spx=10;
+this.spz=2;
+this.bu=[]
+
+}
+shecb(p)
+{
+
+var col=false
+for(var i=0;i<this.bu.length;i++)
+{
+
+if(this.bu[i].colide(p))
+{col=true
+
+}
+
+}
+return col
+}
+shot(pos)
+{
+let b=new bullet(this)
+var vec={x:pos.x-this.x,z:pos.y-this.z}
+b.spx=vec.x/50;
+b.spz=vec.z/50;
+
+this.bu.push(b);
+}
+set(x,z)
+{
+this.x=x;
+this.z=z;
+}
+move(event)
+{
+if(event.key=="ArrowUp")
+this.z=this.z+this.spz;
+if(event.key=="ArrowDown")
+this.z=this.z-this.spz;
+if(event.key=="ArrowLeft")
+this.x=this.x+this.spx;
+if(event.key=="ArrowRight")
+this.x=this.x-this.spx;
+}
+drowp(edx)
+{
+
+}
+drow(edx)
+{
+this.bu.forEach(function(element){element.drow(edx)})
+
+edx.drawImage(img, this.x-10, this.z-10,20,20);
+
+
+if(this.x>500 )
+this.x=500;
+if(this.x<0)
+this.x=0;
+
+if(this.z>500 )
+this.z=500;
+if(this.z<0)
+this.z=0;
+}
+
+
+}
+function mousehnd(e)
+{ 
+var r = this.getBoundingClientRect();
+ var pos = {
+       x : e.pageX-r.left,
+       y : e.pageY-r.top 
+   };
+p.shot(pos);
+
+}
+var edx=document.getElementById("ctx").getContext("2d")
+let p=new player();
+
+let em=new enemyman(7);
+function update()
+{
+edx.clearRect(0,0,500,500);
+edx.drawImage(background, 0, 0,500,500);
+p.drow(edx)
+
+em.drow(edx)
+
+em.move();
+  edx.font="40px Arial"
+edx.fillStyle = 'red';
+   edx.textAlign = "center";
+edx.fillText(di,250,250);
+if(em.sheck(p))
+{
+di=" لقد اصابك المدنب"
+setTimeout(em.rolead,2000);
+}
+
+em.check(p);
+
+}
+function hunkey(event )
+{
+p.move(event);
+
+}
+document.onkeydown=hunkey;
+document.getElementById("ctx").addEventListener('click', mousehnd, false);
+
+setInterval(update,50)
+</script>

@@ -1,0 +1,11 @@
+<canvas id="ctx" width="500" height="500" style="border:1px solid #000000;"></canvas>
+<script>
+var edx=document.getElementById("ctx").getContext("2d")
+var img=new Image();
+
+img.onload = function () {
+edx.drawImage(img, 0, 0,20,20);
+console.log(img);
+}
+img.src="spaceship.png"
+</script>
